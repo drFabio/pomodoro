@@ -18,6 +18,7 @@ function pomodoroController($scope,$interval,focPomodoroService){
 		}
 		if(self.minutes>=self.statusDuration){
 			self.status=focPomodoroService.nextStatus();
+			self.statusDuration=focPomodoroService.getStatusDuration();
 			self.seconds=0;
 			self.minutes=0;
 		}

@@ -22,14 +22,17 @@ describe('PomodoroCtrl', function(){
 		done();
 	});
 	describe('Default config',function(){
-		it('Should start on a task pomodoro',function(done){
+		beforeEach(function(){
 			ctrl.startCount();
+		});
+
+		it('Should start on a task pomodoro',function(done){
 			expect(ctrl.status).toEqual('task');
 			done();
 		});
-	/*	it('Should proceed to a short break automatically after a pomodoro',function(done){
-			ctrl.startCount();
-			theInterval.flush(1500000);
+		it('Should proceed to a short break automatically after a pomodoro',function(done){
+			var pomodoroDuration=25;
+			theInterval.flush(pomodoroDuration*60*1000+200);
 			expect(ctrl.status).toEqual('short_break');
 			done();
 			
@@ -38,9 +41,10 @@ describe('PomodoroCtrl', function(){
 			var pomodoroDuration=25;
 			var shortBreakDuration=5;
 			var time=pomodoroDuration*60*1000*4+shortBreakDuration*60*1000*3;
+			theInterval.flush(time);
 			expect(ctrl.status).toEqual('long_break');
 			done();
-		});*/
+		});
 	});
 	
 });
