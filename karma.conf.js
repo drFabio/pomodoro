@@ -18,7 +18,9 @@ module.exports = function(config) {
         './node_modules/angular-mocks/angular-mocks.js',
         './src/js/*.js',
          './tests/*Spec.js'
-        
+         // './tests/pomodoroServiceSpec.js'
+          // './tests/pomodoroControllerSpec.js'
+
     ],
 
 
