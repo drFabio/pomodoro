@@ -66,11 +66,11 @@ function PomodoroService($rootScope,$timeout){
 PomodoroService.prototype.cancelPomodoro = function() {
 	this.cancelTimer();
 	var ellapsedSeconds=(new Date().getTime()-this._timePomodoroStarted)/1000;
-	this._scope.$emit(POMODORO_CANCELLED_EVENT,this.getStatus(),this.getStatusDuration(),ellapsedSeconds);
+	this._scope.$broadcast(POMODORO_CANCELLED_EVENT,this.getStatus(),this.getStatusDuration(),ellapsedSeconds);
 };
 PomodoroService.prototype.startPomodoro = function() {
 	this.startCounting();
-	this._scope.$emit(NEW_POMODORO_EVENT,this.getStatus(),this.getStatusDuration());
+	this._scope.$broadcast(NEW_POMODORO_EVENT,this.getStatus(),this.getStatusDuration());
 };
 PomodoroService.prototype.startCounting = function() {
 	this.cancelTimer();
@@ -85,7 +85,7 @@ PomodoroService.prototype._startNewEvent = function() {
 	this.startPomodoro();
 };
 PomodoroService.prototype._timerFinished = function() {
-	this._scope.$emit(POMODORO_FINISHED_EVENT,this.getStatus(),this.getStatusDuration());
+	this._scope.$broadcast(POMODORO_FINISHED_EVENT,this.getStatus(),this.getStatusDuration());
 	if(this.behaviour==AUTO_BEHAVIOUR){
 		this._startNewEvent();
 	}

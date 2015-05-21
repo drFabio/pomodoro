@@ -2,9 +2,10 @@ describe('PomodoroCtrl', function(){
 	var scope; //we'll use this scope in our tests
 	var ctrl;
 	var theInterval;
+	var rootScope;
 	var mockPomodoroService={
 		startPomodoro:function(){
-			scope.$emit('focNewPomodoroStarted','task',25);
+			rootScope.$broadcast('focNewPomodoroStarted','task',25);
 		},
 		getStatus:function(){
 			return 'task';
@@ -22,6 +23,7 @@ describe('PomodoroCtrl', function(){
 		theInterval=$interval;
 		//create an empty scope
 		scope = $rootScope.$new();
+		rootScope=$rootScope;
 		//declare the controller and inject our empty scope
 		ctrl=$controller('PomodoroCtrl', {$scope: scope,$interval:$interval,focPomodoroService:mockPomodoroService});
 	}));
@@ -44,9 +46,12 @@ describe('PomodoroCtrl', function(){
 		expect(ctrl.seconds).toEqual(0);
 		expect(ctrl.minutes).toEqual(duration);
 	});
-	// it('Starts counting when a new event is triggered ',function(){
 
-	// });
+	it('Starts counting when a new event is triggered ',function(){
+		spyOn(ctrl,'startCount');
+		rootScope.$broadcast('focNewPomodoroStarted','task',25);
+		expect(ctrl.startCount).toHaveBeenCalled();
+	});
 	// it('Stops the count when it\'s cancelled',function(){
 		
 	// });
