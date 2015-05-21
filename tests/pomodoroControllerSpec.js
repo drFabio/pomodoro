@@ -13,7 +13,12 @@ describe('PomodoroCtrl', function(){
 		getStatusDuration:function(){
 			return 25;
 		},
-		foo:'bar'
+		getEllapsedSeconds:function(){
+			return 0;
+		},
+		getEllapsedMinutes:function(){
+			return 0;
+		},
 
 	};
 	// mock Application to allow us to inject our own dependencies

@@ -24,6 +24,8 @@ function pomodoroController($scope,$interval,focPomodoroService){
 	};
 	this.startCount=function(){
 		self.status=focPomodoroService.getStatus();
+		self.minutes=focPomodoroService.getEllapsedMinutes();
+		self.seconds=focPomodoroService.getEllapsedSeconds();
 		self.statusDuration=focPomodoroService.getStatusDuration();
 		stop = $interval(function() {
 		self.seconds++;
@@ -62,7 +64,14 @@ function PomodoroService($rootScope,$timeout){
 	this._timer;
 	this._timePomodoroStarted;
 }
-
+PomodoroService.prototype.getEllapsedSeconds = function() {
+	var ellapsedSeconds=Math.round((new Date().getTime()-this._timePomodoroStarted)/1000);
+	return ellapsedSeconds%60;
+};
+PomodoroService.prototype.getEllapsedMinutes = function() {
+	var ellapsedSeconds=Math.round((new Date().getTime()-this._timePomodoroStarted)/1000);
+	return Math.round(ellapsedSeconds/60);
+};
 PomodoroService.prototype.cancelPomodoro = function() {
 	this.cancelTimer();
 	var ellapsedSeconds=(new Date().getTime()-this._timePomodoroStarted)/1000;
