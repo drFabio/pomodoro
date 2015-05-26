@@ -142,5 +142,13 @@ PomodoroService.prototype.setDurations = function(durations) {
 };
 angular.module('foc-pomodoro', [])
 .service('focPomodoroService',['$rootScope','$timeout',PomodoroService])
-.controller('PomodoroCtrl', ['$scope','$interval','focPomodoroService',pomodoroController])
 .controller('TasksCtrl', function($scope) {})
+.directive('pomodoroTimer', [function() {
+								return {
+									templateUrl:'/templates/timer.html',
+									restrict: 'E',
+									controllerAs:'pomodoroCtrl',
+									controller:['$scope','$interval','focPomodoroService',pomodoroController]
+								};
+							}]
+);

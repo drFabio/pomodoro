@@ -16,7 +16,7 @@ module.exports = function(config) {
     files: [
         './bower_components/angular/angular.min.js',
         './node_modules/angular-mocks/angular-mocks.js',
-        './src/js/*.js',
+        './js/*.js',
          './tests/*Spec.js'
          // './tests/pomodoroServiceSpec.js'
           // './tests/pomodoroControllerSpec.js'
